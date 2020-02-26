@@ -3,23 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_profile">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.zuehlke.training.easycv.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_profile"
+        android:name="com.zuehlke.training.easycv.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.zuehlke.training.easycv.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_experience"
+        android:name="com.zuehlke.training.easycv.ui.experience.ExperienceFragment"
+        android:label="@string/title_education"
+        tools:layout="@layout/fragment_experience" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.zuehlke.training.easycv.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_education"
+        android:name="com.zuehlke.training.easycv.ui.education.EducationFragment"
+        android:label="@string/title_education"
+        tools:layout="@layout/fragment_education" />
+
+    <fragment
+        android:id="@+id/navigation_skills"
+        android:name="com.zuehlke.training.easycv.ui.skills.SkillsFragment"
+        android:label="@string/title_skills"
+        tools:layout="@layout/fragment_skills" />
+    <fragment
+        android:id="@+id/navigation_export"
+        android:name="com.zuehlke.training.easycv.ui.export.ExportFragment"
+        android:label="@string/title_export"
+        tools:layout="@layout/fragment_export" />
 </navigation>

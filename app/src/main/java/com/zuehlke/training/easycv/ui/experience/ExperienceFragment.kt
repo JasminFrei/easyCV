@@ -1,4 +1,4 @@
-package com.zuehlke.training.easycv.ui.dashboard
+package com.zuehlke.training.easycv.ui.experience
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,24 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.zuehlke.training.easycv.R
 
-class DashboardFragment : Fragment() {
+class ExperienceFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private val experienceViewModel by viewModels<ExperienceViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val root = inflater.inflate(R.layout.fragment_experience, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        experienceViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
