@@ -1,0 +1,2 @@
+rootProject.name='EasyCV'
+include ':app'
