@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_experience"
         android:name="com.zuehlke.training.easycv.ui.experience.ExperienceFragment"
-        android:label="@string/title_education"
+        android:label="@string/title_experience"
         tools:layout="@layout/fragment_experience" />
 
     <fragment
