@@ -57,6 +57,7 @@ class MainActivityTest {
         onView(withId(R.id.text_home)).check(matches(withText(containsString("profile"))))
         onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.action_bar))))
             .check(matches(withText(targetContext.getString(R.string.title_profile))))
-    }
 
+        activityScenario.close()
+    }
 }
