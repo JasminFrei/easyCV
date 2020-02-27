@@ -8,8 +8,10 @@ import com.zuehlke.training.easycv.ui.profile.ProfileFragment
 import com.zuehlke.training.easycv.ui.skills.SkillsFragment
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [ViewModelModule::class])
+@Singleton
+@Component(modules = [ViewModelModule::class, ApplicationModule::class])
 interface AppComponent {
 
     @Component.Factory

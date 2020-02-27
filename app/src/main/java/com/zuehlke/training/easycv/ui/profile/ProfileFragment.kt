@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
 import javax.inject.Inject
@@ -36,6 +37,17 @@ class ProfileFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity!!.applicationContext as CvApplication).appComponent.inject(this)
+        (requireActivity().applicationContext as CvApplication).appComponent.inject(this)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        profileViewModel.profile.observe(viewLifecycleOwner, Observer { profile ->
+            if (profile == null) {
+                Snackbar.make(requireView(), "No data", Snackbar.LENGTH_LONG).show()
+            } else {
+                Snackbar.make(requireView(), "Loaded", Snackbar.LENGTH_LONG).show()
+            }
+        })
     }
 }

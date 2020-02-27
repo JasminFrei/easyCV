@@ -18,6 +18,7 @@ package com.zuehlke.training.easycv.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.ui.education.EducationViewModel
 import com.zuehlke.training.easycv.ui.experience.ExperienceViewModel
 import com.zuehlke.training.easycv.ui.export.ExportViewModel
@@ -90,8 +91,8 @@ open class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
-    fun provideProfileViewModel(): ViewModel {
-        return ProfileViewModel()
+    fun provideProfileViewModel(localRepository: LocalRepository): ViewModel {
+        return ProfileViewModel(localRepository)
     }
 
     @Provides
