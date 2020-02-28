@@ -66,7 +66,7 @@ class ProfileFragmentTest {
                     42,
                     "John",
                     "Smith",
-                    42L,
+                    953938800000,
                     "street",
                     "zip",
                     "location",
@@ -83,7 +83,7 @@ class ProfileFragmentTest {
             onView(withId(R.id.profile_content)).check(matches(isDisplayed()))
             onView(withId(R.id.lblName)).check(matches(withText("John")))
             onView(withId(R.id.lblLastname)).check(matches(withText("Smith")))
-            onView(withId(R.id.lblBirthdate)).check(matches(withText("42")))
+            onView(withId(R.id.lblBirthdate)).check(matches(withText("25.03.2000")))
             onView(withId(R.id.lblEmail)).check(matches(withText("example@example.com")))
             onView(withId(R.id.lblAddress)).check(matches(withText("street\nzip location")))
             onView(withId(R.id.lblPhone)).check(matches(withText("000")))

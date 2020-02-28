@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.util.DateFormatter
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.profile_content.*
 import javax.inject.Inject
@@ -66,7 +67,7 @@ class ProfileFragment : Fragment() {
                 lblNoData.visibility = View.GONE
                 lblName.text = profile.name
                 lblLastname.text = profile.lastname
-                lblBirthdate.text = profile.birthdate.toString() //Todo
+                lblBirthdate.text = DateFormatter.formatNormalDate(profile.birthdate)
                 lblEmail.text = profile.email
                 lblPhone.text = profile.phone
                 lblAddress.text = "${profile.street}\n${profile.zip} ${profile.location}"
