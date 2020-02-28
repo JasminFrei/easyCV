@@ -17,7 +17,7 @@ class EducationFragmentTest {
 
     @Test
     fun testText() {
-        launchFragmentInContainer<EducationFragment>()
+        launchFragmentInContainer<EducationFragment>(themeResId = R.style.AppTheme_NoActionBar)
 
         Espresso.onView(ViewMatchers.withId(R.id.text_dashboard))
             .check(ViewAssertions.matches(ViewMatchers.withText(CoreMatchers.containsString("education"))))

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 class ExportFragmentTest {
     @Test
     fun testText() {
-        launchFragmentInContainer<ExportFragment>()
+        launchFragmentInContainer<ExportFragment>(themeResId = R.style.AppTheme_NoActionBar)
 
         Espresso.onView(ViewMatchers.withId(R.id.text_dashboard))
             .check(ViewAssertions.matches(ViewMatchers.withText(CoreMatchers.containsString("export"))))

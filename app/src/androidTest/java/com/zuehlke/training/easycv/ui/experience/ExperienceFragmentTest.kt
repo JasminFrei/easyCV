@@ -17,7 +17,7 @@ class ExperienceFragmentTest {
 
     @Test
     fun testText() {
-        launchFragmentInContainer<ExperienceFragment>()
+        launchFragmentInContainer<ExperienceFragment>(themeResId = R.style.AppTheme_NoActionBar)
 
         Espresso.onView(ViewMatchers.withId(R.id.text_dashboard))
             .check(ViewAssertions.matches(ViewMatchers.withText(CoreMatchers.containsString("experience"))))
