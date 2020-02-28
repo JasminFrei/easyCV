@@ -1,9 +1,6 @@
 package com.zuehlke.training.easycv.ui.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +18,11 @@ class ProfileViewModel @Inject constructor(
 
     val text: LiveData<String> = _text
     val profile: LiveData<Profile?> =
-        liveData(dispatcher) { emitSource(localRepository.getProfile()) }
+        liveData(context = viewModelScope.coroutineContext + dispatcher) {
+            emitSource(
+                localRepository.getProfile()
+            )
+        }
 
 
 }
