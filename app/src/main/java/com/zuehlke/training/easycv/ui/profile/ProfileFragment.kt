@@ -10,10 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.snackbar.Snackbar
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.profile_content.*
 import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
@@ -59,9 +59,18 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.profile.observe(viewLifecycleOwner, Observer { profile ->
             if (profile == null) {
-                Snackbar.make(btnEditProfile, "No data", Snackbar.LENGTH_LONG).show()
+                profile_content.visibility = View.INVISIBLE
+                lblNoData.visibility = View.VISIBLE
             } else {
-                Snackbar.make(btnEditProfile, "Loaded", Snackbar.LENGTH_LONG).show()
+                profile_content.visibility = View.VISIBLE
+                lblNoData.visibility = View.GONE
+                lblName.text = profile.name
+                lblLastname.text = profile.lastname
+                lblBirthdate.text = profile.birthdate.toString() //Todo
+                lblEmail.text = profile.email
+                lblPhone.text = profile.phone
+                lblAddress.text = "${profile.street}\n${profile.zip} ${profile.location}"
+                lblAbout.text = profile.description
             }
         })
     }

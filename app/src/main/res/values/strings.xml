@@ -5,4 +5,12 @@
     <string name="title_skills">Skills</string>
     <string name="title_experience">Experience</string>
     <string name="title_export">Export</string>
+    <string name="label_name">Name</string>
+    <string name="label_lastname">Lastname</string>
+    <string name="label_birthdate">Date of Birth</string>
+    <string name="label_email">E-Mail</string>
+    <string name="label_address">Address</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_about">About me</string>
+    <string name="not_data_found">Oops, no data found!</string>
 </resources>

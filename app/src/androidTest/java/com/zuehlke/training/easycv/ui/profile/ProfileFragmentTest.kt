@@ -13,17 +13,33 @@ import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.appbar.AppBarLayout
 import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.data.local.LocalRepository
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Matcher
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
 
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
 class ProfileFragmentTest {
+    @Inject
+    lateinit var localRepository: LocalRepository
+
+    init {
+
+    }
+
     @Test
-    fun testText() {
+    fun testContent_NoData() {
+        launchFragmentInContainer<ProfileFragment>(themeResId = R.style.AppTheme_NoActionBar)
+
+        onView(withId(R.id.btnEditProfile)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testContent_WithData() {
         launchFragmentInContainer<ProfileFragment>(themeResId = R.style.AppTheme_NoActionBar)
 
         onView(withId(R.id.btnEditProfile)).check(matches(isDisplayed()))
