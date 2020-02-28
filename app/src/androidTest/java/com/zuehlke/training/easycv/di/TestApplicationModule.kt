@@ -18,7 +18,7 @@ object TestApplicationModule {
             context.applicationContext,
             CvDatabase::class.java
         )
-            .allowMainThreadQueries() //Todo: I don't like this
+            .allowMainThreadQueries() //They also do this in the tutorial, it seems to be ok
             .build()
     }
 }
