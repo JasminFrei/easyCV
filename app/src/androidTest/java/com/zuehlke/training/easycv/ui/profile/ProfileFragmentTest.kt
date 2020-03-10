@@ -27,7 +27,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -51,10 +50,8 @@ class ProfileFragmentTest {
         //Also inject the repository in this test class to add fake data per test
         ((InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
                 as MyTestApplication).appComponent as TestAppComponent).inject(this)
+        database.clearAllTables()
     }
-
-    @After
-    fun closeDB() = database.close()
 
     @Test
     fun testContent_NoData() {
