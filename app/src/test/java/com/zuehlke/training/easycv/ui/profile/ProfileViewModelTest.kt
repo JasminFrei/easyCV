@@ -7,13 +7,19 @@ import com.nhaarman.mockitokotlin2.mock
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
 import com.zuehlke.training.easycv.getOrAwaitValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.*
+import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class ProfileViewModelTest {
 
     private lateinit var profileViewModel: ProfileViewModel
@@ -28,7 +34,13 @@ class ProfileViewModelTest {
         val repositoryMock = mock<LocalRepository> {
             on { getProfile() } doReturn liveData
         }
-        profileViewModel = ProfileViewModel(repositoryMock)
+        profileViewModel = ProfileViewModel(repositoryMock, Dispatchers.Unconfined)
+        Dispatchers.setMain(Dispatchers.Unconfined)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
