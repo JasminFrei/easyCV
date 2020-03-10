@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.zuehlke.training.easycv.ui.editprofile.EditProfileFragment"
-        android:label="@string/title_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        android:name="com.zuehlke.training.easycv.ui.editprofile.BasicInformationFragment"
+        android:label="@string/title_basic_info"
+        tools:layout="@layout/fragment_basic_info">
+        <action
+            android:id="@+id/action_editProfileFragment_to_adressFragment"
+            app:destination="@id/adressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adressFragment"
+        android:name="com.zuehlke.training.easycv.ui.editprofile.AddressFragment"
+        android:label="@string/title_edit_address"
+        tools:layout="@layout/fragment_address" />
 </navigation>

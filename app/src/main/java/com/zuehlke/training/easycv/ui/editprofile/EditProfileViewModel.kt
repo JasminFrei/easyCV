@@ -14,12 +14,12 @@ class EditProfileViewModel @Inject constructor(
     localRepository: LocalRepository,
     dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
-    val name: String? = null
-    val lastname: String? = null
-    val birthdate: Long? = null
-    val phone: String? = null
-    val email: String? = null
-    val description: String? = null
+    var name: String? = null
+    var lastname: String? = null
+    var birthdate: Long? = null
+    var phone: String? = null
+    var email: String? = null
+    var description: String? = null
 
 
     val profile: LiveData<Profile?> =

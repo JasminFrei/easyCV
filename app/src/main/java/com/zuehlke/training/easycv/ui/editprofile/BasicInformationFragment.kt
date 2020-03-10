@@ -5,18 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
 import com.zuehlke.training.easycv.util.DateFormatter
-import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_basic_info.*
 import javax.inject.Inject
 
-class EditProfileFragment : Fragment() {
+class BasicInformationFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -29,7 +29,7 @@ class EditProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        val root = inflater.inflate(R.layout.fragment_basic_info, container, false)
         return root
     }
 
@@ -50,8 +50,15 @@ class EditProfileFragment : Fragment() {
             txtAbout.setText(profile?.description)
         })
 
-        btnSave.setOnClickListener {
-            Toast.makeText(requireContext(), "Save profile", Toast.LENGTH_SHORT).show()
+        btnNext.setOnClickListener {
+            viewModel.name = txtName.text.toString()
+            viewModel.lastname = txtLastname.text.toString()
+            viewModel.birthdate = 0L //Todo: Change "Text"-Date into long
+            viewModel.email = txtEmail.text.toString()
+            viewModel.phone = txtPhone.text.toString()
+            viewModel.description = txtAbout.toString()
+            //Todo: Validate input
+            findNavController().navigate(BasicInformationFragmentDirections.actionEditProfileFragmentToAdressFragment())
         }
     }
 }

@@ -13,6 +13,8 @@
     <string name="label_phone">Phone</string>
     <string name="label_about">About me</string>
     <string name="not_data_found">Oops, no data found!</string>
-    <string name="title_edit_profile">Edit Profile</string>
+    <string name="title_basic_info">Edit Basic Information</string>
     <string name="label_button_save">Save</string>
+    <string name="title_edit_address">Edit Address</string>
+    <string name="label_button_continue">continue</string>
 </resources>

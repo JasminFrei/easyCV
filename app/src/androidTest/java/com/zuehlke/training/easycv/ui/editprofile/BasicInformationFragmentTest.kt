@@ -25,7 +25,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @MediumTest
 @RunWith(AndroidJUnit4::class)
-class EditProfileFragmentTest {
+class BasicInformationFragmentTest {
 
     @Inject
     lateinit var database: CvDatabase
@@ -45,7 +45,7 @@ class EditProfileFragmentTest {
 
     @Test
     fun testContent_NoData() {
-        launchFragmentInContainer<EditProfileFragment>(themeResId = R.style.AppTheme)
+        launchFragmentInContainer<BasicInformationFragment>(themeResId = R.style.AppTheme)
 
         onView(withId(R.id.txtName)).check(matches(withText("")))
         onView(withId(R.id.txtLastname)).check(matches(withText("")))
@@ -74,7 +74,7 @@ class EditProfileFragmentTest {
                     null
                 )
             )
-            launchFragmentInContainer<EditProfileFragment>(themeResId = R.style.AppTheme)
+            launchFragmentInContainer<BasicInformationFragment>(themeResId = R.style.AppTheme)
 
             onView(withId(R.id.txtName)).check(matches(withText("John")))
             onView(withId(R.id.txtLastname)).check(matches(withText("Smith")))
