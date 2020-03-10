@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,7 +21,7 @@ class BasicInformationFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<EditProfileViewModel> { viewModelFactory }
+    private val viewModel by activityViewModels<EditProfileViewModel> { viewModelFactory }
 
 
     override fun onCreateView(
@@ -35,7 +35,10 @@ class BasicInformationFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().applicationContext as CvApplication).appComponent.inject(this)
+        (requireActivity().applicationContext as CvApplication).submoduleInjector.injectBasicInformationFragment(
+            this,
+            requireActivity()
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

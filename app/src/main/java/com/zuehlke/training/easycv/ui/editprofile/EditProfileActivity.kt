@@ -6,14 +6,21 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.di.EditProfileComponent
 
 
 class EditProfileActivity : AppCompatActivity() {
+    lateinit var editProfileComponent: EditProfileComponent
+
     private lateinit var appBarConfiguration: AppBarConfiguration
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        editProfileComponent =
+            (application as CvApplication).appComponent.editProfileComponent().create()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
         val navController = findNavController(R.id.nav_host_fragment)

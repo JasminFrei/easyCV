@@ -6,10 +6,12 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
+import com.zuehlke.training.easycv.di.ActivityScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
+@ActivityScope
 class EditProfileViewModel @Inject constructor(
     localRepository: LocalRepository,
     dispatcher: CoroutineDispatcher = Dispatchers.IO

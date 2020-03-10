@@ -1,7 +1,6 @@
 package com.zuehlke.training.easycv.di
 
 import android.content.Context
-import com.zuehlke.training.easycv.ui.editprofile.BasicInformationFragment
 import com.zuehlke.training.easycv.ui.education.EducationFragment
 import com.zuehlke.training.easycv.ui.experience.ExperienceFragment
 import com.zuehlke.training.easycv.ui.export.ExportFragment
@@ -25,5 +24,6 @@ interface AppComponent {
     fun inject(fragment: ExportFragment)
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: SkillsFragment)
-    fun inject(fragment: BasicInformationFragment)
+
+    fun editProfileComponent(): EditProfileComponent.Factory
 }
