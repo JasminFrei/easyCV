@@ -82,4 +82,6 @@ dependencies {
         because 'Lower version needed because of dependencies'
     }
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2'
+    androidTestImplementation "androidx.navigation:navigation-testing:$androidXNavigation"
+
 }

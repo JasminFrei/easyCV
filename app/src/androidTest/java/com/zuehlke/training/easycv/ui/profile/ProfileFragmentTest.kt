@@ -3,10 +3,15 @@ package com.zuehlke.training.easycv.ui.profile
 import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.navigation.Navigation
+import androidx.navigation.testing.TestNavHostController
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
@@ -19,6 +24,7 @@ import com.zuehlke.training.easycv.data.local.Profile
 import com.zuehlke.training.easycv.di.TestAppComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 import org.junit.After
@@ -101,6 +107,28 @@ class ProfileFragmentTest {
         //Todo: I don't like this!
         Thread.sleep(15)
         onView(withId(R.id.cvProfile)).check(matches(not(isDisplayed())))
+    }
+
+    @Test
+    fun testNavigationToEditProfile() {
+        // Create a TestNavHostController
+        val navController = TestNavHostController(
+            ApplicationProvider.getApplicationContext()
+        )
+        navController.setGraph(R.navigation.mobile_navigation)
+
+        // Create a graphical FragmentScenario for the TitleScreen
+        val titleScenario =
+            launchFragmentInContainer<ProfileFragment>(themeResId = R.style.AppTheme)
+
+        // Set the NavController property on the fragment
+        titleScenario.onFragment { fragment ->
+            Navigation.setViewNavController(fragment.requireView(), navController)
+        }
+
+        // Verify that performing a click changes the NavController’s state
+        onView(ViewMatchers.withId(R.id.btnEditProfile)).perform(ViewActions.click())
+        assertThat(navController.currentDestination?.id, `is`(R.id.editProfileActivity))
     }
 }
 

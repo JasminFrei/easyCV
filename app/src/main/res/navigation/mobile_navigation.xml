@@ -9,7 +9,11 @@
         android:id="@+id/navigation_profile"
         android:name="com.zuehlke.training.easycv.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_editProfileActivity"
+            app:destination="@id/editProfileActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_experience"
@@ -33,4 +37,9 @@
         android:name="com.zuehlke.training.easycv.ui.export.ExportFragment"
         android:label="@string/title_export"
         tools:layout="@layout/fragment_export" />
+    <activity
+        android:id="@+id/editProfileActivity"
+        android:name="com.zuehlke.training.easycv.ui.editprofile.EditProfileActivity"
+        android:label="EditProfileActivity"
+        tools:layout="@layout/activity_edit_profile" />
 </navigation>

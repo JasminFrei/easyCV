@@ -13,4 +13,5 @@
     <string name="label_phone">Phone</string>
     <string name="label_about">About me</string>
     <string name="not_data_found">Oops, no data found!</string>
+    <string name="title_edit_profile">Edit Profile</string>
 </resources>

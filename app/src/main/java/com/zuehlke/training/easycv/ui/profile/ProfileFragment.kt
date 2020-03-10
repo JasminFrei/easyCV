@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
@@ -74,6 +75,10 @@ class ProfileFragment : Fragment() {
                 lblAbout.text = profile.description
             }
         })
+
+        btnEditProfile.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToEditProfileActivity())
+        }
     }
 }
 

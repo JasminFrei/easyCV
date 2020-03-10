@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_profile_nav"
+    app:startDestination="@id/editProfileFragment">
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.zuehlke.training.easycv.ui.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile" />
+</navigation>
