@@ -2,6 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.3.61'
+    ext.androidXNavigation = "2.2.1"
     repositories {
         google()
         jcenter()
@@ -10,7 +11,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidXNavigation"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -26,4 +27,9 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    dagger_version = "2.25.2"
+    room_version = "2.2.4"
 }
