@@ -17,4 +17,8 @@
     <string name="label_button_save">Save</string>
     <string name="title_edit_address">Edit Address</string>
     <string name="label_button_continue">continue</string>
+    <string name="label_street">Street</string>
+    <string name="label_city">City</string>
+    <string name="label_zip">ZIP</string>
+    <string name="label_country">Country</string>
 </resources>
