@@ -3,6 +3,7 @@ package com.zuehlke.training.easycv.ui.editprofile
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -14,6 +15,7 @@ import com.zuehlke.training.easycv.R
 import com.zuehlke.training.easycv.data.local.CvDatabase
 import com.zuehlke.training.easycv.data.local.Profile
 import com.zuehlke.training.easycv.di.TestAppComponent
+import com.zuehlke.training.easycv.hasTextInputLayoutErrorText
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -83,5 +85,23 @@ class BasicInformationFragmentTest {
             onView(withId(R.id.txtPhone)).check(matches(withText("000")))
             onView(withId(R.id.txtAbout)).check(matches(withText("Blabla")))
         }
+    }
+
+    @Test
+    fun testInputError() {
+        launchFragmentInContainer<BasicInformationFragment>(themeResId = R.style.AppTheme)
+
+        onView(withId(R.id.btnNext)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        onView(withId(R.id.inputName)).check(
+            matches(
+                hasTextInputLayoutErrorText(
+                    context.getString(
+                        R.string.min_length,
+                        3
+                    )
+                )
+            )
+        )
     }
 }

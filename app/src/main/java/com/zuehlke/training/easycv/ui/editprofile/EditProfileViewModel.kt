@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
 import com.zuehlke.training.easycv.di.ActivityScope
+import com.zuehlke.training.easycv.util.InputValidator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +30,8 @@ class EditProfileViewModel @Inject constructor(
 
     private val _profileLoaded = MutableLiveData<Boolean>()
     val profileLoaded: LiveData<Boolean> = _profileLoaded
+
+    fun validateName() = InputValidator.validateText(name, 3)
 
     fun loadProfile() = viewModelScope.launch {
         val profile = localRepository.getProfilePlain()

@@ -58,12 +58,19 @@ class BasicInformationFragment : Fragment() {
 
         btnNext.setOnClickListener {
             viewModel.name = txtName.text.toString()
+
+            val res = viewModel.validateName()
+            if (!res.valid) {
+                inputName.isErrorEnabled = true
+                inputName.error = getString(res.message!!, *res.args)
+                return@setOnClickListener
+            }
+            //Todo: Validate other input
             viewModel.lastname = txtLastname.text.toString()
             viewModel.birthdate = 0L //Todo: Change "Text"-Date into long
             viewModel.email = txtEmail.text.toString()
             viewModel.phone = txtPhone.text.toString()
             viewModel.description = txtAbout.text.toString()
-            //Todo: Validate input
             findNavController().navigate(BasicInformationFragmentDirections.actionEditProfileFragmentToAdressFragment())
         }
     }
