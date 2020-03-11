@@ -12,6 +12,9 @@ interface ProfileDao {
     @Query("SELECT * from profile LIMIT 1")
     fun getProfile(): LiveData<Profile?>
 
+    @Query("SELECT * from profile LIMIT 1")
+    suspend fun getProfilePlain(): Profile?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(profile: Profile)
 

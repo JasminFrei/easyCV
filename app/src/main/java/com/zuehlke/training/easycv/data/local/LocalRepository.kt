@@ -9,6 +9,10 @@ class LocalRepository @Inject constructor(private val database: CvDatabase) {
         return database.profileDao().getProfile()
     }
 
+    suspend fun getProfilePlain(): Profile? {
+        return database.profileDao().getProfilePlain()
+    }
+
     suspend fun saveProfile(profile: Profile) {
         database.profileDao().insert(profile)
     }

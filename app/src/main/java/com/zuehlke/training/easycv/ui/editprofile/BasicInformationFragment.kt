@@ -43,14 +43,17 @@ class BasicInformationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel.loadProfile()
 
-        viewModel.profile.observe(viewLifecycleOwner, Observer { profile ->
-            txtName.setText(profile?.name)
-            txtLastname.setText(profile?.lastname)
-            profile?.birthdate?.let { txtBirthdate.setText(DateFormatter.formatNormalDate(it)) }
-            txtEmail.setText(profile?.email)
-            txtPhone.setText(profile?.phone)
-            txtAbout.setText(profile?.description)
+        viewModel.profileLoaded.observe(viewLifecycleOwner, Observer { loaded ->
+            if (loaded) {
+                txtName.setText(viewModel.name)
+                txtLastname.setText(viewModel.lastname)
+                viewModel.birthdate?.let { txtBirthdate.setText(DateFormatter.formatNormalDate(it)) }
+                txtEmail.setText(viewModel.email)
+                txtPhone.setText(viewModel.phone)
+                txtAbout.setText(viewModel.description)
+            }
         })
 
         btnNext.setOnClickListener {
@@ -59,7 +62,7 @@ class BasicInformationFragment : Fragment() {
             viewModel.birthdate = 0L //Todo: Change "Text"-Date into long
             viewModel.email = txtEmail.text.toString()
             viewModel.phone = txtPhone.text.toString()
-            viewModel.description = txtAbout.toString()
+            viewModel.description = txtAbout.text.toString()
             //Todo: Validate input
             findNavController().navigate(BasicInformationFragmentDirections.actionEditProfileFragmentToAdressFragment())
         }

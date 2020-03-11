@@ -61,7 +61,7 @@ class TestViewModelModule {
     @IntoMap
     @ViewModelKey(EditProfileViewModel::class)
     fun provideEditProfileViewModel(localRepository: LocalRepository): ViewModel {
-        return EditProfileViewModel(localRepository, Dispatchers.Unconfined)
+        return EditProfileViewModel(localRepository)
     }
 
 }

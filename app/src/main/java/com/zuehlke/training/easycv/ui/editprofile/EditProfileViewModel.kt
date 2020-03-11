@@ -1,21 +1,19 @@
 package com.zuehlke.training.easycv.ui.editprofile
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.zuehlke.training.easycv.data.local.LocalRepository
-import com.zuehlke.training.easycv.data.local.Profile
 import com.zuehlke.training.easycv.di.ActivityScope
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @ActivityScope
 class EditProfileViewModel @Inject constructor(
-    localRepository: LocalRepository,
-    dispatcher: CoroutineDispatcher = Dispatchers.IO
+    val localRepository: LocalRepository
 ) : ViewModel() {
+    var id: Int? = null
     var name: String? = null
     var lastname: String? = null
     var birthdate: Long? = null
@@ -23,11 +21,22 @@ class EditProfileViewModel @Inject constructor(
     var email: String? = null
     var description: String? = null
 
+    private val _profileLoaded = MutableLiveData<Boolean>()
+    val profileLoaded: LiveData<Boolean> = _profileLoaded
 
-    val profile: LiveData<Profile?> =
-        liveData(context = viewModelScope.coroutineContext + dispatcher) {
-            emitSource(
-                localRepository.getProfile()
-            )
+    fun loadProfile() = viewModelScope.launch {
+        val profile = localRepository.getProfilePlain()
+        if (profile != null) {
+            id = profile.profile_id
+            name = profile.name
+            lastname = profile.lastname
+            birthdate = profile.birthdate
+            phone = profile.phone
+            email = profile.email
+            description = profile.description
+            _profileLoaded.value = true
+        } else {
+            _profileLoaded.value = false
         }
+    }
 }
