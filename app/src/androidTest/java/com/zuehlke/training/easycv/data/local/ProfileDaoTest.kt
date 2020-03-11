@@ -41,7 +41,42 @@ class ProfileDaoTest {
     fun closeDb() = database.close()
 
     @Test
-    fun insertProfileAndGetBack() = runBlockingTest {
+    fun insertNewProfileWithoutId() = runBlockingTest {
+        val profile = Profile(
+            null,
+            "John",
+            "Smith",
+            42L,
+            "street",
+            "zip",
+            "location",
+            "CH",
+            "000",
+            "example@example.com",
+            "Blabla",
+            null
+        )
+        database.profileDao().insert(profile)
+
+        val loadedProfile = database.profileDao().getProfile().getOrAwaitValue()
+
+        assertThat(loadedProfile, notNullValue())
+        assertThat(loadedProfile!!.profile_id, notNullValue())
+        assertThat(loadedProfile.name, `is`("John"))
+        assertThat(loadedProfile.lastname, `is`("Smith"))
+        assertThat(loadedProfile.birthdate, `is`(42L))
+        assertThat(loadedProfile.street, `is`("street"))
+        assertThat(loadedProfile.zip, `is`("zip"))
+        assertThat(loadedProfile.location, `is`("location"))
+        assertThat(loadedProfile.country, `is`("CH"))
+        assertThat(loadedProfile.phone, `is`("000"))
+        assertThat(loadedProfile.email, `is`("example@example.com"))
+        assertThat(loadedProfile.description, `is`("Blabla"))
+        assertThat(loadedProfile.imagePath, `is`(nullValue()))
+    }
+
+    @Test
+    fun insertProfileAndGetBackWithId() = runBlockingTest {
         val profile = Profile(
             42,
             "John",
@@ -73,5 +108,49 @@ class ProfileDaoTest {
         assertThat(loadedProfile.email, `is`("example@example.com"))
         assertThat(loadedProfile.description, `is`("Blabla"))
         assertThat(loadedProfile.imagePath, `is`(nullValue()))
+    }
+
+    @Test
+    fun updateNameInProfile() = runBlockingTest {
+        val profile = Profile(
+            42,
+            "John",
+            "Smith",
+            42L,
+            "street",
+            "zip",
+            "location",
+            "CH",
+            "000",
+            "example@example.com",
+            "Blabla",
+            null
+        )
+        database.profileDao().insert(profile)
+
+        val profileLiveData = database.profileDao().getProfile()
+        val firstProfile = profileLiveData.getOrAwaitValue()
+        assertThat(firstProfile, notNullValue())
+        assertThat(firstProfile!!.name, `is`("John"))
+
+        val newProfile = Profile(
+            42,
+            "Hans",
+            "Smith",
+            42L,
+            "street",
+            "zip",
+            "location",
+            "CH",
+            "000",
+            "example@example.com",
+            "Blabla",
+            null
+        )
+        database.profileDao().insert(newProfile)
+
+        val secondProfile = profileLiveData.getOrAwaitValue()
+        assertThat(secondProfile, notNullValue())
+        assertThat(secondProfile!!.name, `is`("Hans"))
     }
 }
