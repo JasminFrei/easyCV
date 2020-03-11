@@ -37,16 +37,16 @@ class EditProfileViewModelTest {
             `when`(repositoryMock.getProfilePlain()).thenReturn(
                 Profile(
                     42,
-                    "",
-                    "",
-                    0L,
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    null,
+                    "name",
+                    "lastname",
+                    42L,
+                    "street",
+                    "zip",
+                    "location",
+                    "country",
+                    "phone",
+                    "email",
+                    "blabla",
                     null
                 )
             )
@@ -67,5 +67,15 @@ class EditProfileViewModelTest {
         val loaded = profileViewModel.profileLoaded.getOrAwaitValue()
         assertThat(loaded, `is`(true))
         assertThat(profileViewModel.id, `is`(42))
+        assertThat(profileViewModel.name, `is`("name"))
+        assertThat(profileViewModel.lastname, `is`("lastname"))
+        assertThat(profileViewModel.birthdate, `is`(42L))
+        assertThat(profileViewModel.email, `is`("email"))
+        assertThat(profileViewModel.phone, `is`("phone"))
+        assertThat(profileViewModel.description, `is`("blabla"))
+        assertThat(profileViewModel.street, `is`("street"))
+        assertThat(profileViewModel.zip, `is`("zip"))
+        assertThat(profileViewModel.city, `is`("location"))
+        assertThat(profileViewModel.country, `is`("country"))
     }
 }

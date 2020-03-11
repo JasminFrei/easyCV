@@ -1,6 +1,7 @@
 package com.zuehlke.training.easycv.di
 
 import android.content.Context
+import com.zuehlke.training.easycv.ui.editprofile.AddressFragmentTest
 import com.zuehlke.training.easycv.ui.editprofile.BasicInformationFragmentTest
 import com.zuehlke.training.easycv.ui.profile.ProfileFragmentTest
 import dagger.BindsInstance
@@ -18,4 +19,5 @@ interface TestAppComponent : AppComponent {
 
     fun inject(test: ProfileFragmentTest)
     fun inject(test: BasicInformationFragmentTest)
+    fun inject(test: AddressFragmentTest)
 }

@@ -20,6 +20,10 @@ class EditProfileViewModel @Inject constructor(
     var phone: String? = null
     var email: String? = null
     var description: String? = null
+    var street: String? = null
+    var zip: String? = null
+    var city: String? = null
+    var country: String? = null
 
     private val _profileLoaded = MutableLiveData<Boolean>()
     val profileLoaded: LiveData<Boolean> = _profileLoaded
@@ -34,6 +38,10 @@ class EditProfileViewModel @Inject constructor(
             phone = profile.phone
             email = profile.email
             description = profile.description
+            street = profile.street
+            zip = profile.zip
+            city = profile.location
+            country = profile.country
             _profileLoaded.value = true
         } else {
             _profileLoaded.value = false
