@@ -1,7 +1,6 @@
 package com.zuehlke.training.easycv.ui.editProfile
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import com.nhaarman.mockitokotlin2.mock
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
@@ -24,7 +23,6 @@ import org.mockito.Mockito.`when`
 class EditProfileViewModelTest {
 
     private lateinit var profileViewModel: EditProfileViewModel
-    private val liveData = MutableLiveData<Profile?>()
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule
@@ -77,5 +75,23 @@ class EditProfileViewModelTest {
         assertThat(profileViewModel.zip, `is`("zip"))
         assertThat(profileViewModel.city, `is`("location"))
         assertThat(profileViewModel.country, `is`("country"))
+    }
+
+    @Test
+    fun saveProfile() {
+        profileViewModel.apply {
+            name = "name"
+            lastname = "lastname"
+            birthdate = 42L
+            street = "street"
+            zip = "zip"
+            city = "location"
+            country = "country"
+            phone = "phone"
+            email = "email"
+            description = "description"
+        }
+        val result = profileViewModel.saveProfile().getOrAwaitValue()
+        assertThat(result, `is`(true))
     }
 }

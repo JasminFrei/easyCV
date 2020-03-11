@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -57,6 +58,13 @@ class AddressFragment : Fragment() {
             viewModel.city = txtCity.text.toString()
             viewModel.country = txtCountry.text.toString()
             //Todo: Input Validation
+            viewModel.saveProfile().observe(viewLifecycleOwner, Observer { worked ->
+                if (worked) {
+                    requireActivity().finish()
+                } else {
+                    Toast.makeText(requireActivity(), "Did not work!", Toast.LENGTH_LONG).show()
+                }
+            })
         }
     }
 
