@@ -1,24 +1,27 @@
 package com.zuehlke.training.easycv.ui.profile
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.ui.BaseFragment
+import com.zuehlke.training.easycv.ui.editprofile.EditProfileActivity
 import com.zuehlke.training.easycv.util.DateFormatter
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.profile_content.*
 import javax.inject.Inject
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -77,7 +80,24 @@ class ProfileFragment : Fragment() {
         })
 
         btnEditProfile.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToEditProfileActivity())
+            navigateToActivityForResult(
+                Intent(requireActivity(), EditProfileActivity::class.java),
+                ProfileFragmentDirections.actionNavigationProfileToEditProfileActivity(),
+                42
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 42) {
+            when (resultCode) {
+                Activity.RESULT_OK -> Toast.makeText(
+                    requireActivity(),
+                    R.string.profile_data_updated,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 }

@@ -23,4 +23,5 @@
     <string name="label_country">Country</string>
     <string name="min_length">At least %1$s characters</string>
     <string name="max_length">At most %1$s characters</string>
+    <string name="profile_data_updated">Profile data successfully updated!</string>
 </resources>

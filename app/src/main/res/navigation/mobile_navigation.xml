@@ -32,11 +32,13 @@
         android:name="com.zuehlke.training.easycv.ui.skills.SkillsFragment"
         android:label="@string/title_skills"
         tools:layout="@layout/fragment_skills" />
+
     <fragment
         android:id="@+id/navigation_export"
         android:name="com.zuehlke.training.easycv.ui.export.ExportFragment"
         android:label="@string/title_export"
         tools:layout="@layout/fragment_export" />
+
     <activity
         android:id="@+id/editProfileActivity"
         android:name="com.zuehlke.training.easycv.ui.editprofile.EditProfileActivity"

@@ -1,5 +1,6 @@
 package com.zuehlke.training.easycv.ui.editprofile
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,6 +61,7 @@ class AddressFragment : Fragment() {
             //Todo: Input Validation
             viewModel.saveProfile().observe(viewLifecycleOwner, Observer { worked ->
                 if (worked) {
+                    requireActivity().setResult(Activity.RESULT_OK)
                     requireActivity().finish()
                 } else {
                     Toast.makeText(requireActivity(), "Did not work!", Toast.LENGTH_LONG).show()
