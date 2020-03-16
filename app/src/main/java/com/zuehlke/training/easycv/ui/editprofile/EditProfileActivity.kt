@@ -8,6 +8,7 @@ import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.databinding.ActivityEditProfileBinding
 import com.zuehlke.training.easycv.di.EditProfileComponent
 
 
@@ -22,7 +23,9 @@ class EditProfileActivity : AppCompatActivity() {
             (application as CvApplication).appComponent.editProfileComponent().create()
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_profile)
+        val binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration.Builder()
             .setFallbackOnNavigateUpListener {

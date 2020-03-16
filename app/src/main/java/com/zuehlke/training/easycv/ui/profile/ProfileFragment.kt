@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
 import com.zuehlke.training.easycv.CvApplication
 import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.databinding.FragmentProfileBinding
 import com.zuehlke.training.easycv.ui.editprofile.EditProfileActivity
 import com.zuehlke.training.easycv.ui.navigateToActivityForResult
 import com.zuehlke.training.easycv.util.DateFormatter
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.profile_content.*
+
 import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
@@ -29,13 +29,15 @@ class ProfileFragment : Fragment() {
 
     private val profileViewModel by viewModels<ProfileViewModel> { viewModelFactory }
 
+    private lateinit var binding: FragmentProfileBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        return root
+        binding = FragmentProfileBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -46,41 +48,45 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         var isShow = true
         var scrollRange = -1
-        app_bar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
+        binding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
             if (scrollRange == -1) {
                 scrollRange = barLayout?.totalScrollRange!!
             }
             if (scrollRange + verticalOffset == 0) {
-                cvProfile.visibility = View.INVISIBLE
-                toolbar_layout.title = getString(R.string.title_profile)
+                binding.cvProfile.visibility = View.INVISIBLE
+                binding.toolbarLayout.title = getString(R.string.title_profile)
                 isShow = true
             } else if (isShow) {
-                cvProfile.visibility = View.VISIBLE
-                toolbar_layout.title = " "
+                binding.cvProfile.visibility = View.VISIBLE
+                binding.toolbarLayout.title = " "
                 isShow = false
             }
         })
 
         profileViewModel.profile.observe(viewLifecycleOwner, Observer { profile ->
+            val profileContentBinding = binding.profileContent
             if (profile == null) {
-                profile_content.visibility = View.INVISIBLE
-                lblNoData.visibility = View.VISIBLE
+                profileContentBinding.profileContent.visibility = View.INVISIBLE
+                binding.lblNoData.visibility = View.VISIBLE
             } else {
-                profile_content.visibility = View.VISIBLE
-                lblNoData.visibility = View.GONE
-                lblName.text = profile.name
-                lblLastname.text = profile.lastname
-                lblBirthdate.text = DateFormatter.formatNormalDate(profile.birthdate)
-                lblEmail.text = profile.email
-                lblPhone.text = profile.phone
-                lblAddress.text = "${profile.street}\n${profile.zip} ${profile.location}"
-                lblAbout.text = profile.description
+                profileContentBinding.profileContent.visibility = View.VISIBLE
+                binding.lblNoData.visibility = View.GONE
+                profileContentBinding.lblName.text = profile.name
+                profileContentBinding.lblLastname.text = profile.lastname
+                profileContentBinding.lblBirthdate.text =
+                    DateFormatter.formatNormalDate(profile.birthdate)
+                profileContentBinding.lblEmail.text = profile.email
+                profileContentBinding.lblPhone.text = profile.phone
+                profileContentBinding.lblAddress.text =
+                    "${profile.street}\n${profile.zip} ${profile.location}"
+                profileContentBinding.lblAbout.text = profile.description
             }
         })
 
-        btnEditProfile.setOnClickListener {
+        binding.btnEditProfile.setOnClickListener {
             navigateToActivityForResult(
                 Intent(requireActivity(), EditProfileActivity::class.java),
                 ProfileFragmentDirections.actionNavigationProfileToEditProfileActivity(),

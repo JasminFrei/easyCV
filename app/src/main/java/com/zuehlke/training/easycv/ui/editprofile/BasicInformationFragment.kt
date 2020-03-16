@@ -11,9 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.zuehlke.training.easycv.CvApplication
-import com.zuehlke.training.easycv.R
+import com.zuehlke.training.easycv.databinding.FragmentBasicInfoBinding
 import com.zuehlke.training.easycv.util.DateFormatter
-import kotlinx.android.synthetic.main.fragment_basic_info.*
 import javax.inject.Inject
 
 class BasicInformationFragment : Fragment() {
@@ -23,14 +22,16 @@ class BasicInformationFragment : Fragment() {
 
     private val viewModel by activityViewModels<EditProfileViewModel> { viewModelFactory }
 
+    private lateinit var binding: FragmentBasicInfoBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_basic_info, container, false)
-        return root
+        binding = FragmentBasicInfoBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -47,30 +48,36 @@ class BasicInformationFragment : Fragment() {
 
         viewModel.profileLoaded.observe(viewLifecycleOwner, Observer { loaded ->
             if (loaded) {
-                txtName.setText(viewModel.name)
-                txtLastname.setText(viewModel.lastname)
-                viewModel.birthdate?.let { txtBirthdate.setText(DateFormatter.formatNormalDate(it)) }
-                txtEmail.setText(viewModel.email)
-                txtPhone.setText(viewModel.phone)
-                txtAbout.setText(viewModel.description)
+                binding.txtName.setText(viewModel.name)
+                binding.txtLastname.setText(viewModel.lastname)
+                viewModel.birthdate?.let {
+                    binding.txtBirthdate.setText(
+                        DateFormatter.formatNormalDate(
+                            it
+                        )
+                    )
+                }
+                binding.txtEmail.setText(viewModel.email)
+                binding.txtPhone.setText(viewModel.phone)
+                binding.txtAbout.setText(viewModel.description)
             }
         })
 
-        btnNext.setOnClickListener {
-            viewModel.name = txtName.text.toString()
+        binding.btnNext.setOnClickListener {
+            viewModel.name = binding.txtName.text.toString()
 
             val res = viewModel.validateName()
             if (!res.valid) {
-                inputName.isErrorEnabled = true
-                inputName.error = getString(res.message!!, *res.args)
+                binding.inputName.isErrorEnabled = true
+                binding.inputName.error = getString(res.message!!, *res.args)
                 return@setOnClickListener
             }
             //Todo: Validate other input
-            viewModel.lastname = txtLastname.text.toString()
+            viewModel.lastname = binding.txtLastname.text.toString()
             viewModel.birthdate = 0L //Todo: Change "Text"-Date into long
-            viewModel.email = txtEmail.text.toString()
-            viewModel.phone = txtPhone.text.toString()
-            viewModel.description = txtAbout.text.toString()
+            viewModel.email = binding.txtEmail.text.toString()
+            viewModel.phone = binding.txtPhone.text.toString()
+            viewModel.description = binding.txtAbout.text.toString()
             findNavController().navigate(BasicInformationFragmentDirections.actionEditProfileFragmentToAdressFragment())
         }
     }

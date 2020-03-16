@@ -12,8 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.zuehlke.training.easycv.CvApplication
-import com.zuehlke.training.easycv.R
-import kotlinx.android.synthetic.main.fragment_address.*
+import com.zuehlke.training.easycv.databinding.FragmentAddressBinding
 import org.jetbrains.annotations.TestOnly
 import javax.inject.Inject
 
@@ -24,13 +23,15 @@ class AddressFragment : Fragment() {
 
     private val viewModel by activityViewModels<EditProfileViewModel> { viewModelFactory }
 
+    private lateinit var binding: FragmentAddressBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_address, container, false)
-        return root
+        binding = FragmentAddressBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -46,18 +47,18 @@ class AddressFragment : Fragment() {
 
         viewModel.profileLoaded.observe(viewLifecycleOwner, Observer { loaded ->
             if (loaded) {
-                txtStreet.setText(viewModel.street)
-                txtZip.setText(viewModel.zip)
-                txtCity.setText(viewModel.city)
-                txtCountry.setText(viewModel.country)
+                binding.txtStreet.setText(viewModel.street)
+                binding.txtZip.setText(viewModel.zip)
+                binding.txtCity.setText(viewModel.city)
+                binding.txtCountry.setText(viewModel.country)
             }
         })
 
-        btnNext.setOnClickListener {
-            viewModel.street = txtStreet.text.toString()
-            viewModel.zip = txtZip.text.toString()
-            viewModel.city = txtCity.text.toString()
-            viewModel.country = txtCountry.text.toString()
+        binding.btnNext.setOnClickListener {
+            viewModel.street = binding.txtStreet.text.toString()
+            viewModel.zip = binding.txtZip.text.toString()
+            viewModel.city = binding.txtCity.text.toString()
+            viewModel.country = binding.txtCountry.text.toString()
             //Todo: Input Validation
             viewModel.saveProfile().observe(viewLifecycleOwner, Observer { worked ->
                 if (worked) {
