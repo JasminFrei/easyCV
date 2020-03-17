@@ -3,9 +3,6 @@ package com.zuehlke.training.easycv.ui.profile
 import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.navigation.Navigation
-import androidx.navigation.testing.TestNavHostController
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -99,31 +96,10 @@ class ProfileFragmentTest {
 
         onView(withId(R.id.app_bar)).perform(collapseAppBarLayout())
         //Todo: I don't like this!
-        Thread.sleep(15)
+        Thread.sleep(20)
         onView(withId(R.id.cvProfile)).check(matches(not(isDisplayed())))
     }
 
-    @Test
-    fun testNavigationToEditProfile() {
-        // Create a TestNavHostController
-        val navController = TestNavHostController(
-            ApplicationProvider.getApplicationContext()
-        )
-        navController.setGraph(R.navigation.mobile_navigation)
-
-        // Create a graphical FragmentScenario for the TitleScreen
-        val titleScenario =
-            launchFragmentInContainer<ProfileFragment>(themeResId = R.style.AppTheme)
-
-        // Set the NavController property on the fragment
-        titleScenario.onFragment { fragment ->
-            Navigation.setViewNavController(fragment.requireView(), navController)
-        }
-
-        // Verify that performing a click changes the NavController’s state
-        //onView(withId(R.id.btnEditProfile)).perform(ViewActions.click())
-        //assertThat(navController.currentDestination?.id, `is`(R.id.editProfileActivity))
-    }
 }
 
 fun collapseAppBarLayout(): ViewAction? {
