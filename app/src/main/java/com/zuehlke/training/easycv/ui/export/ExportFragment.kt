@@ -38,4 +38,11 @@ class ExportFragment : Fragment() {
         super.onAttach(context)
         (requireActivity().applicationContext as CvApplication).appComponent.inject(this)
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        binding.btnExport.setOnClickListener {
+            exportViewModel.exportCv(requireContext())
+        }
+    }
 }

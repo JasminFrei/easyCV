@@ -2,6 +2,7 @@ package com.zuehlke.training.easycv.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.zuehlke.training.easycv.data.external.LatexOnlineDataSource
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.ui.editprofile.EditProfileViewModel
 import com.zuehlke.training.easycv.ui.education.EducationViewModel
@@ -9,6 +10,7 @@ import com.zuehlke.training.easycv.ui.experience.ExperienceViewModel
 import com.zuehlke.training.easycv.ui.export.ExportViewModel
 import com.zuehlke.training.easycv.ui.profile.ProfileViewModel
 import com.zuehlke.training.easycv.ui.skills.SkillsViewModel
+import com.zuehlke.training.easycv.util.CvMaker
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -39,8 +41,12 @@ class TestViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(ExportViewModel::class)
-    fun provideExportViewModel(): ViewModel {
-        return ExportViewModel()
+    fun provideExportViewModel(
+        cvMaker: CvMaker,
+        latexOnlineDataSource: LatexOnlineDataSource,
+        localRepository: LocalRepository
+    ): ViewModel {
+        return ExportViewModel(cvMaker, latexOnlineDataSource, localRepository)
     }
 
     @Provides

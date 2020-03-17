@@ -25,9 +25,11 @@ android {
         }
     }
 
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
+    sourceSets {
+        androidTest {
+            assets.srcDirs = ['src/androidTest/assets']
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -58,6 +60,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     debugImplementation "androidx.fragment:fragment-testing:1.2.2"
+    implementation "com.squareup.retrofit2:retrofit:2.7.2"
+
+    implementation "org.apache.commons:commons-compress:1.20"
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
