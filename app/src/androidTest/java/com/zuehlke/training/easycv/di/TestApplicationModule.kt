@@ -6,7 +6,9 @@ import com.zuehlke.training.easycv.data.external.LatexOnlineService
 import com.zuehlke.training.easycv.data.local.CvDatabase
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -28,8 +30,15 @@ object TestApplicationModule {
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .callTimeout(60, TimeUnit.SECONDS)
+            .build()
         return Retrofit.Builder()
             .baseUrl("https://latexonline.cc/")
+            .client(okHttpClient)
             .build()
     }
 

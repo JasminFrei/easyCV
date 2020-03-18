@@ -9,6 +9,7 @@ import com.zuehlke.training.easycv.data.external.LatexOnlineDataSource
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
 import com.zuehlke.training.easycv.util.CvMaker
+import com.zuehlke.training.easycv.util.CvTemplates
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,9 +39,9 @@ class ExportViewModel @Inject constructor(
     fun exportCv(context: Context) {
         val profile = _profile.value
         if (profile != null) {
-            val tarball = cvMaker.makeCv(profile)
+            val tarball = cvMaker.makeCv(profile, CvTemplates.cv17)
             viewModelScope.launch(dispatcher) {
-                latexOnlineDataSource.createCvPdf(tarball, context)
+                latexOnlineDataSource.createCvPdf(tarball, CvTemplates.cv17.mainFile, context)
             }
         }
     }

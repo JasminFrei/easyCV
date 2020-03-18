@@ -11,13 +11,13 @@ import javax.inject.Inject
 
 class LatexOnlineDataSource @Inject constructor(val service: LatexOnlineService) {
 
-    suspend fun createCvPdf(file: File, context: Context) {
+    suspend fun createCvPdf(file: File, mainPath: String, context: Context) {
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
 
         val body = MultipartBody.Part.createFormData("tarball.tar", file.name, requestFile)
 
         try {
-            val reply = service.createPdf("cv.tex", body)
+            val reply = service.createPdf(mainPath, body)
             context.openFileOutput("cv.pdf", Context.MODE_PRIVATE).use {
                 it.write(reply.bytes())
             }
