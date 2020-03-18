@@ -18,6 +18,7 @@ package com.zuehlke.training.easycv.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.zuehlke.training.easycv.cvmaker.CvMaker
 import com.zuehlke.training.easycv.data.external.LatexOnlineDataSource
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.ui.editprofile.EditProfileViewModel
@@ -26,7 +27,6 @@ import com.zuehlke.training.easycv.ui.experience.ExperienceViewModel
 import com.zuehlke.training.easycv.ui.export.ExportViewModel
 import com.zuehlke.training.easycv.ui.profile.ProfileViewModel
 import com.zuehlke.training.easycv.ui.skills.SkillsViewModel
-import com.zuehlke.training.easycv.util.CvMaker
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides

@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zuehlke.training.easycv.cvmaker.CvMaker
+import com.zuehlke.training.easycv.cvmaker.CvTemplates
 import com.zuehlke.training.easycv.data.external.LatexOnlineDataSource
 import com.zuehlke.training.easycv.data.local.LocalRepository
 import com.zuehlke.training.easycv.data.local.Profile
-import com.zuehlke.training.easycv.util.CvMaker
-import com.zuehlke.training.easycv.util.CvTemplates
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

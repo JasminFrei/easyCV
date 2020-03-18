@@ -1,4 +1,4 @@
-package com.zuehlke.training.easycv.util
+package com.zuehlke.training.easycv.cvmaker
 
 import android.content.Context
 import com.zuehlke.training.easycv.data.local.Profile

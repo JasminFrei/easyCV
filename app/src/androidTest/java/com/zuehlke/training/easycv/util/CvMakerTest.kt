@@ -3,6 +3,7 @@ package com.zuehlke.training.easycv.util
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import androidx.test.platform.app.InstrumentationRegistry
+import com.zuehlke.training.easycv.cvmaker.CvMaker
 import com.zuehlke.training.easycv.data.local.Profile
 import org.junit.Before
 import org.junit.Test
@@ -17,7 +18,8 @@ class CvMakerTest {
 
     @Before
     fun setUp() {
-        cvMaker = CvMaker(InstrumentationRegistry.getInstrumentation().context)
+        cvMaker =
+            CvMaker(InstrumentationRegistry.getInstrumentation().context)
         profile = Profile(
             42,
             "name",

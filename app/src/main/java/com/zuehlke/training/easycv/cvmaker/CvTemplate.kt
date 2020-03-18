@@ -1,4 +1,4 @@
-package com.zuehlke.training.easycv.util
+package com.zuehlke.training.easycv.cvmaker
 
 data class CvTemplate(
     val path: String,
