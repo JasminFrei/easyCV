@@ -18,7 +18,7 @@ class ExportViewModelTest {
 
     @Before
     fun init() {
-        exportViewModel = ExportViewModel()
+        //exportViewModel = ExportViewModel()
     }
 
     @Test
